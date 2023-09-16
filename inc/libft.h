@@ -78,10 +78,6 @@ void		ft_sec_free(void *ptr);
 char		*get_next_line(int fd);
 char		*ft_substr_gnl(char *s, int start, int len, int *nl_len);
 char		*ft_strjoin_gnl(char *s1, char *s2, int bytes, int *nl_len);
-char		*ft_line_proccess(char **buffer, int bytes, int *nl_len);
-char		*ft_buffer_reader(int fd, char **buffer, char *reader, int *nl_len);
-char		*ft_delete_line_from_buffer(char **buffer, int *nl_len);
-int			ft_get_endline(char *str);
 //
 int			ft_atoi(const char *str);
 void		ft_bzero(void *s, size_t n);

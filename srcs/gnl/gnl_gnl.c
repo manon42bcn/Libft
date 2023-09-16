@@ -14,34 +14,47 @@
 #include <stdio.h>
 
 /**
- * @brief Fetch the next line from the file descriptor.
+ * @brief Get the position of the newline character in a string.
  *
- * @param fd File descriptor.
- * @return A string containing the next line, or NULL on error or EOF.
+ * @param str Input string to search.
+ * @return Position of the newline character, or 0 if not found.
  */
-char	*get_next_line(int fd)
-{	
-	static char	*buffer[256];
-	char		*rst;
-	char		*reader;
-	int			nl_len[2];
+static inline int	ft_get_endline(char *str)
+{
+	int	i;
 
-	if (fd < 0 || fd > 257 || BUFFER_SIZE < 1)
-		return (NULL);
-	if (!buffer[fd])
-		buffer[fd] = NULL;
-	nl_len[0] = ft_get_endline(buffer[fd]);
-	nl_len[1] = (int)ft_strlen(buffer[fd]);
-	if (nl_len[0] == 0)
+	i = 0;
+	if (!str)
+		return (0);
+	while (str[i])
 	{
-		reader = (char *)malloc(sizeof(char) * (BUFFER_SIZE + 1));
-		if (!reader)
-			return (NULL);
-		rst = ft_buffer_reader(fd, &buffer[fd], reader, &nl_len[0]);
-		ft_safe_free_char(&reader);
+		if (str[i] == '\n')
+			return (i + 1);
+		i++;
 	}
-	else
-		rst = ft_line_proccess(&buffer[fd], 0, &nl_len[0]);
+	return (0);
+}
+
+/**
+ * @brief Delete the current line from the buffer.
+ *
+ * @param buffer Pointer to the current buffer.
+ * @param nl_len Pointer to an array containing the new line length
+ * and total length.
+ * @return A string containing the remaining content after the
+ * current line is deleted.
+ */
+static inline char	*ft_delete_line_from_buffer(char **buffer, int *nl_len)
+{
+	char	*rst;
+
+	if (nl_len[0] == nl_len[1] || (nl_len[0] == 0 && nl_len[1] > 0))
+	{
+		ft_safe_free_char(buffer);
+		return (NULL);
+	}
+	rst = ft_substr_gnl(*buffer, nl_len[0], nl_len[1] - nl_len[0], &nl_len[0]);
+	ft_safe_free_char(buffer);
 	return (rst);
 }
 
@@ -54,7 +67,7 @@ char	*get_next_line(int fd)
  * total length.
  * @return A string containing the processed line.
  */
-char	*ft_line_proccess(char **buffer, int bytes, int *nl_len)
+static inline char	*ft_line_proccess(char **buffer, int bytes, int *nl_len)
 {
 	char	*rst;
 
@@ -62,7 +75,7 @@ char	*ft_line_proccess(char **buffer, int bytes, int *nl_len)
 		return (NULL);
 	if (nl_len[0] == 0 && bytes == 0)
 	{
-		rst = ft_strndup((const char *)buffer, (size_t)nl_len[1]);
+		rst = ft_strndup(*buffer, nl_len[1]);
 		*buffer = ft_delete_line_from_buffer(buffer, &nl_len[0]);
 	}
 	else
@@ -84,7 +97,8 @@ char	*ft_line_proccess(char **buffer, int bytes, int *nl_len)
  * and total length.
  * @return A string containing the processed line.
  */
-char	*ft_buffer_reader(int fd, char **buffer, char *reader, int *nl_len)
+static inline char	*ft_buffer_reader(int fd, char **buffer,
+	char *reader, int *nl_len)
 {
 	int	bytes;
 	int	nl_reader;
@@ -99,7 +113,7 @@ char	*ft_buffer_reader(int fd, char **buffer, char *reader, int *nl_len)
 		nl_len[1] += bytes;
 		nl_reader = ft_get_endline(reader);
 		if (!*buffer)
-			*buffer = ft_strndup((const char *)reader, (size_t)bytes);
+			*buffer = ft_strndup(reader, bytes);
 		else
 			*buffer = ft_strjoin_gnl(*buffer, reader, bytes, &nl_len[0]);
 		if (*buffer == NULL)
@@ -113,46 +127,31 @@ char	*ft_buffer_reader(int fd, char **buffer, char *reader, int *nl_len)
 }
 
 /**
- * @brief Delete the current line from the buffer.
+ * @brief Fetch the next line from the file descriptor.
  *
- * @param buffer Pointer to the current buffer.
- * @param nl_len Pointer to an array containing the new line length
- * and total length.
- * @return A string containing the remaining content after the
- * current line is deleted.
+ * @param fd File descriptor.
+ * @return A string containing the next line, or NULL on error or EOF.
  */
-char	*ft_delete_line_from_buffer(char **buffer, int *nl_len)
+char	*get_next_line(int fd)
 {
-	char	*rst;
+	static char	*buffer[256];
+	char		*rst;
+	char		*reader;
+	int			nl_len[2];
 
-	if (nl_len[0] == nl_len[1] || (nl_len[0] == 0 && nl_len[1] > 0))
-	{
-		ft_safe_free_char(buffer);
+	if (fd < 0 || fd > 257 || BUFFER_SIZE < 1)
 		return (NULL);
-	}
-	rst = ft_substr_gnl(*buffer, nl_len[0], nl_len[1] - nl_len[0], &nl_len[0]);
-	ft_safe_free_char(buffer);
-	return (rst);
-}
-
-/**
- * @brief Get the position of the newline character in a string.
- *
- * @param str Input string to search.
- * @return Position of the newline character, or 0 if not found.
- */
-int	ft_get_endline(char *str)
-{
-	int	i;
-
-	i = 0;
-	if (!str)
-		return (0);
-	while (str[i])
+	if (!buffer[fd])
+		buffer[fd] = NULL;
+	nl_len[0] = ft_get_endline(buffer[fd]);
+	nl_len[1] = ft_strlen(buffer[fd]);
+	if (nl_len[0] == 0)
 	{
-		if (str[i] == '\n')
-			return (i + 1);
-		i++;
+		reader = (char *)ft_sec_calloc(sizeof(char) * (BUFFER_SIZE + 1));
+		rst = ft_buffer_reader(fd, &buffer[fd], reader, &nl_len[0]);
+		ft_safe_free_char(&reader);
 	}
-	return (0);
+	else
+		rst = ft_line_proccess(&buffer[fd], 0, &nl_len[0]);
+	return (rst);
 }
