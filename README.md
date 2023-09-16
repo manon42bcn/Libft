@@ -29,6 +29,43 @@ Kind of disclaimer:
 - Many of these functions might not be the most efficient way to perform a specific task. I've created them throughout my learning process and haven't modified them since. I've consistently retained the functions as they were when I evaluated.
 - There might be functions that seem repetitive, with only minor differences. Consider that, in some projects, those tiny details saved me a couple of lines to make `norminette` happy!
 
+## Generating Documentation with Doxygen
+
+To generate detailed, and more friendly documentation for this project, follow the steps outlined below:
+
+### 1. Install Doxygen:
+   
+If you haven't already installed Doxygen, you can do so using your system's package manager.
+
+* Debian/Ubuntu-based systems:
+
+```bash
+sudo apt-get install doxygen
+```
+
+* On macOS:
+
+```bash
+brew install doxygen
+```
+
+### 2. Generate the Documentation:
+
+From the root directory of the project, where the `Doxyfile` is located, run:
+
+```bash
+doxygen Doxyfile
+```
+
+### 3. View the Documentation:
+
+Once Doxygen completes the documentation generation, you can view it by opening the `html/index.html` file in your preferred web browser:
+
+```bash
+open docs/html/index.html   # On macOS
+xdg-open docs/html/index.html   # On Linux systems
+```
+
 ## **1. Libft Functions** ##
 
 Basic `libft` with bonus. Scored 125%.
