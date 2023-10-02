@@ -18,8 +18,10 @@
                                      @@@@                             
                                      @@@@                             
                                      @@@@                             
-```
 
+whoAmI(campus=42barcelona, login=mporras-, mail=manuel.porras.ojeda@gmail.com)
+Feel free to write!
+```
 # Libft Extended Library #
 
 An extensive C library for commonly used functions, extending upon the basic `libft` functionalities.
