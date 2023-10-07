@@ -63,6 +63,7 @@ SRCS		=	ft/ft_atoi.c \
 				ext/ft_strtrim_clean.c \
 				ext/ft_tab_utl.c \
 				ext/ft_secure_alloc.c \
+				ext/ft_myregex.c \
 				lst/ft_lstadd_back.c \
 				lst/ft_lstadd_front.c \
 				lst/ft_lstclear.c \

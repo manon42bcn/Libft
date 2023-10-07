@@ -74,6 +74,7 @@ void		*ft_sec_calloc(size_t size);
 void		ft_perror(char *msg);
 void		ft_my_perror(char *exc, char *msg);
 void		ft_sec_free(void *ptr);
+t_bool		ft_myregex(char *haystack, char *pattern);
 //gnl
 char		*get_next_line(int fd);
 char		*ft_substr_gnl(char *s, int start, int len, int *nl_len);
