@@ -165,7 +165,7 @@ Extended functionalities designed for more specialized tasks and operations:
 - **`void ft_perror(char *msg)`** : Custom error message function.
 - **`void ft_my_perror(char *exc, char *msg)`** : Another custom error message function.
 - **`void ft_sec_free(void *ptr)`** : Safely frees memory.
-- **`t_bool ft_myregex(char *haystack, char *pattern);`**: Check if a string can be described by a given pattern.
+- **`t_bool ft_myregex(char *haystack, char *pattern);`**: Check if a string can be described by a given pattern. It handles basic patters as in bash (e.g: *.c, *name*.file).
 
 ## **3. GNL (Get Next Line) Functions**
 
