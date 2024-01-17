@@ -30,7 +30,7 @@ static inline int	ft_magnitude(int n)
 	if (n == 0)
 		return (1);
 	if (n < 0)
-	{	
+	{
 		len = 1;
 		nbr = n * -1;
 	}

@@ -6,7 +6,7 @@
 /*   By: mporras- <manon42bcn@yahoo.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/30 01:27:02 by mporras-          #+#    #+#             */
-/*   Updated: 2022/10/27 10:06:16 by mporras-         ###   ########.fr       */
+/*   Updated: 2024/01/18 00:11:17 by mporras-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ static int	ft_strfloat_isprint(char c)
 static void	ft_strfloat_spaces(const char *str, int *i, long double *sign)
 {
 	while (ft_strfloat_isprint(str[*(i)]) == 1)
-			*(i) += 1;
+		*(i) += 1;
 	if (str[*(i)] == '-' || str[*(i)] == '+')
 	{
 		if (str[*(i)] == '-')
@@ -91,7 +91,7 @@ long double	ft_atolf(char *str)
 		else if (str[i] == '.' && power == 0)
 			power++;
 		else if (str[i] >= '0' && str[i] <= '9')
-		{	
+		{
 			if (power > 0)
 				power *= 10;
 			rst[0] = rst[0] * 10 + (str[i] - '0');

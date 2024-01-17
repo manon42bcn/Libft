@@ -6,7 +6,7 @@
 /*   By: mporras <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/10 22:59:25 by mporras           #+#    #+#             */
-/*   Updated: 2022/06/21 14:07:40 by msoler-e         ###   ########.fr       */
+/*   Updated: 2024/01/18 00:12:20 by mporras-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ static inline int	ft_atoi_isprint(char c)
 static inline void	ft_atoi_spaces(const char *str, int *i, long long int *rst)
 {
 	while (ft_atoi_isprint(str[*(i)]) == 1)
-			*(i) = *(i) + 1;
+		*(i) = *(i) + 1;
 	if (str[*(i)] == '-' || str[*(i)] == '+')
 	{
 		if (str[*(i)] == '-')
@@ -96,7 +96,7 @@ static inline int	ft_atoi_test(long long int *rst, char c)
  * @return The integer value of the parsed portion of the string.
  */
 int	ft_atoi(const char *str)
-{	
+{
 	long long int	rst[3];
 	int				test;
 	int				i;
@@ -111,7 +111,7 @@ int	ft_atoi(const char *str)
 		if (!(str[i] >= '0' && str[i] <= '9'))
 			return ((int)rst[2]);
 		else if (str[i] >= '0' && str[i] <= '9')
-		{	
+		{
 			test = ft_atoi_test(&rst[0], str[i]);
 			if (test != 1)
 				return (test);

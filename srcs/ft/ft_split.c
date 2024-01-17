@@ -6,7 +6,7 @@
 /*   By: mporras <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/11 01:35:29 by mporras           #+#    #+#             */
-/*   Updated: 2022/07/07 15:23:17 by msoler-e         ###   ########.fr       */
+/*   Updated: 2024/01/18 00:11:52 by mporras-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,7 +109,7 @@ char	**ft_split(char const *s, char c)
 	if (rst == NULL)
 		return (NULL);
 	while (k < deep)
-	{	
+	{
 		while (s[i] && s[i] == c)
 			i++;
 		rst[k] = ft_strdup_split(s, c, &i);
